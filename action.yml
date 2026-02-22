@@ -1,0 +1,70 @@
+name: 'YanHui Debug AI'
+description: 'CI fails? YanHui remembers every bug ever solved. Get instant fixes from a shared AI knowledge base.'
+author: 'washinmura'
+
+branding:
+  icon: 'zap'
+  color: 'orange'
+
+inputs:
+  claw-id:
+    description: 'Your Claw ID for billing (get one free at https://api.washinmura.jp/api/v2/debug-ai)'
+    required: true
+  error-log:
+    description: 'Custom error text to analyze (if empty, auto-captures from /tmp/*.log files)'
+    required: false
+    default: ''
+  auto-fix:
+    description: 'Create a PR with the suggested fix (true/false)'
+    required: false
+    default: 'false'
+  comment:
+    description: 'Post fix as a PR/issue comment (true/false). Updates existing comment on re-run.'
+    required: false
+    default: 'true'
+  api-url:
+    description: 'YanHui API endpoint (default: production)'
+    required: false
+    default: 'https://api.washinmura.jp/api/v2/debug-ai'
+  language:
+    description: 'Response language: en, zh, ja'
+    required: false
+    default: 'en'
+  github-token:
+    description: 'GitHub token for PR comments (default: github.token)'
+    required: false
+    default: ${{ github.token }}
+
+outputs:
+  status:
+    description: 'Result status: knowledge_hit, analyzed, error'
+    value: ${{ steps.yanhui.outputs.status }}
+  fix:
+    description: 'The suggested fix (JSON)'
+    value: ${{ steps.yanhui.outputs.fix }}
+  source:
+    description: 'Where the fix came from: knowledge_base, sonnet_4.6, opus_local'
+    value: ${{ steps.yanhui.outputs.source }}
+  cost:
+    description: 'Cost of this analysis in USD'
+    value: ${{ steps.yanhui.outputs.cost }}
+  entry-id:
+    description: 'Knowledge base entry ID (for feedback)'
+    value: ${{ steps.yanhui.outputs.entry_id }}
+
+runs:
+  using: 'composite'
+  steps:
+    - name: YanHui Debug AI Analysis
+      id: yanhui
+      shell: bash
+      env:
+        CLAW_ID: ${{ inputs.claw-id }}
+        ERROR_LOG: ${{ inputs.error-log }}
+        API_URL: ${{ inputs.api-url }}
+        LANGUAGE: ${{ inputs.language }}
+        AUTO_FIX: ${{ inputs.auto-fix }}
+        COMMENT: ${{ inputs.comment }}
+        GITHUB_TOKEN: ${{ inputs.github-token }}
+      run: |
+        bash "${{ github.action_path }}/entrypoint.sh"
