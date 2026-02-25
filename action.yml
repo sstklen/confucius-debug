@@ -1,14 +1,14 @@
-name: '顏回 YanHui Debug AI'
-description: 'CI fails? YanHui (顏回) checks 200+ known bugs in 4ms. Not found? AI analyzes it. Fix saved to shared KB for everyone.'
+name: 'Confucius Debug AI'
+description: 'CI fails? Search 1,100+ solved AI agent bugs instantly. No match? AI fixes it and saves to KB — next person gets it free.'
 author: 'washinmura'
 
 branding:
-  icon: 'zap'
+  icon: 'search'
   color: 'orange'
 
 inputs:
-  claw-id:
-    description: 'Your Claw ID for billing (get one free at https://api.washinmura.jp/api/v2/debug-ai)'
+  lobster-id:
+    description: 'Your Lobster ID for billing (get one free via MCP: claude mcp add confucius-debug --transport http https://api.washinmura.jp/mcp/debug)'
     required: true
   error-log:
     description: 'Custom error text to analyze (if empty, auto-captures from /tmp/*.log files)'
@@ -23,7 +23,7 @@ inputs:
     required: false
     default: 'true'
   api-url:
-    description: 'YanHui API endpoint (default: production)'
+    description: 'Confucius Debug API endpoint (default: production)'
     required: false
     default: 'https://api.washinmura.jp/api/v2/debug-ai'
   language:
@@ -38,28 +38,28 @@ inputs:
 outputs:
   status:
     description: 'Result status: knowledge_hit, analyzed, error'
-    value: ${{ steps.yanhui.outputs.status }}
+    value: ${{ steps.confucius.outputs.status }}
   fix:
     description: 'The suggested fix (JSON)'
-    value: ${{ steps.yanhui.outputs.fix }}
+    value: ${{ steps.confucius.outputs.fix }}
   source:
-    description: 'Where the fix came from: knowledge_base, sonnet_4.6, opus_local'
-    value: ${{ steps.yanhui.outputs.source }}
+    description: 'Where the fix came from: knowledge_base, sonnet, opus'
+    value: ${{ steps.confucius.outputs.source }}
   cost:
     description: 'Cost of this analysis in USD'
-    value: ${{ steps.yanhui.outputs.cost }}
+    value: ${{ steps.confucius.outputs.cost }}
   entry-id:
     description: 'Knowledge base entry ID (for feedback)'
-    value: ${{ steps.yanhui.outputs.entry_id }}
+    value: ${{ steps.confucius.outputs.entry_id }}
 
 runs:
   using: 'composite'
   steps:
-    - name: YanHui Debug AI Analysis
-      id: yanhui
+    - name: Confucius Debug AI Analysis
+      id: confucius
       shell: bash
       env:
-        CLAW_ID: ${{ inputs.claw-id }}
+        LOBSTER_ID: ${{ inputs.lobster-id }}
         ERROR_LOG: ${{ inputs.error-log }}
         API_URL: ${{ inputs.api-url }}
         LANGUAGE: ${{ inputs.language }}

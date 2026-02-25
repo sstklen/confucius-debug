@@ -1,11 +1,11 @@
 #!/bin/bash
-# YanHui Debug AI — GitHub Action Entrypoint
-# "One Claw debugs, all Claws benefit"
+# Confucius Debug AI — GitHub Action Entrypoint
+# "不貳過 — Never repeat a mistake"
 #
 # Flow:
 # 1. Capture error from CI logs or user input
 # 2. Sanitize sensitive data (API keys, passwords, tokens)
-# 3. Send to YanHui API (KB search → Opus → Sonnet fallback)
+# 3. Send to Confucius API (KB search → AI analysis fallback)
 # 4. Output fix suggestion
 # 5. Optionally comment on PR (with dedup)
 
@@ -98,12 +98,12 @@ ERROR_TEXT=$(echo "$ERROR_TEXT" | sanitize_secrets)
 # Truncate to 2000 chars on a line boundary
 ERROR_TEXT=$(echo "$ERROR_TEXT" | head -c 2000 | head -n -0)
 
-echo "::group::Sending to YanHui Debug AI"
+echo "::group::Sending to Confucius Debug AI"
 echo "Error length: ${#ERROR_TEXT} chars"
-echo "Claw ID: $(mask_id "$CLAW_ID")"
+echo "Lobster ID: $(mask_id "$LOBSTER_ID")"
 
 # ============================================
-# 2. Call YanHui API
+# 2. Call Confucius API
 # ============================================
 
 # Extract structured error message from the log text
@@ -123,7 +123,7 @@ export ERROR_DESC ERROR_MSG
 PAYLOAD=$(python3 -c "
 import json, os
 print(json.dumps({
-    'lobster_id': os.environ['CLAW_ID'],
+    'lobster_id': os.environ['LOBSTER_ID'],
     'error_description': os.environ.get('ERROR_DESC', '')[:1000],
     'error_message': os.environ.get('ERROR_MSG', '')[:500],
     'language': os.environ.get('LANGUAGE', 'en'),
@@ -141,7 +141,7 @@ print(json.dumps({
 # Call the API
 RESPONSE=$(curl -s -w "\n%{http_code}" -X POST "$API_URL" \
   -H "Content-Type: application/json" \
-  -H "User-Agent: YanHui-CI/1.0" \
+  -H "User-Agent: Confucius-Debug/2.0" \
   -d "$PAYLOAD" \
   --max-time 30 \
   2>/dev/null || echo -e "\n000")
@@ -157,9 +157,10 @@ echo "::endgroup::"
 # ============================================
 
 if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
-  # Parse all fields in ONE python3 call
-  eval "$(echo "$BODY" | python3 -c "
-import sys, json, shlex
+  # 解析 API 回傳（安全方式：寫入暫存檔，避免 eval 注入風險）
+  PARSE_FILE=$(mktemp)
+  echo "$BODY" | python3 -c "
+import sys, json, shlex, os
 try:
     d = json.load(sys.stdin)
     r = d.get('result', {})
@@ -175,12 +176,22 @@ try:
         'CATEGORY': r.get('category', ''),
         'ATTRIBUTION': y.get('attribution', ''),
     }
-    for k, v in fields.items():
-        print(f'{k}={shlex.quote(v)}')
-except Exception as e:
-    print(f\"STATUS='unknown'\")
-    print(f\"SOURCE='unknown'\")
-" 2>/dev/null || echo "STATUS='unknown'")"
+    # 寫入暫存檔（用 shlex.quote 確保安全），避免直接 eval API 回傳
+    with open(os.environ['PARSE_FILE'], 'w') as f:
+        for k, v in fields.items():
+            f.write(f'{k}={shlex.quote(v)}\n')
+except Exception:
+    with open(os.environ['PARSE_FILE'], 'w') as f:
+        f.write(\"STATUS='unknown'\nSOURCE='unknown'\n\")
+" 2>/dev/null
+  # 驗證暫存檔只包含合法的 shell 變數賦值
+  if grep -qvE '^[A-Z_]+=' "$PARSE_FILE" 2>/dev/null; then
+    echo "::warning::Unexpected content in parsed response, using defaults"
+    STATUS='unknown'; SOURCE='unknown'
+  else
+    source "$PARSE_FILE"
+  fi
+  rm -f "$PARSE_FILE"
 
   # Set outputs
   echo "status=$STATUS" >> "$GITHUB_OUTPUT"
@@ -189,7 +200,7 @@ except Exception as e:
   echo "entry_id=$ENTRY_ID" >> "$GITHUB_OUTPUT"
 
   # Multi-line output for fix (unique delimiter)
-  EOF_MARKER="YANHUI_EOF_$$"
+  EOF_MARKER="CONFUCIUS_EOF_$$"
   {
     echo "fix<<$EOF_MARKER"
     echo "$BODY"
@@ -202,7 +213,7 @@ except Exception as e:
 
   if [ "$STATUS" = "knowledge_hit" ]; then
     echo ""
-    echo "::notice::🦞 YanHui: Knowledge Base Hit! (cost: \$$COST)"
+    echo "::notice::🦞 Confucius: YanHui KB Hit! (cost: \$$COST)"
     echo ""
     echo "============================================"
     echo "  Source: $SOURCE"
@@ -221,7 +232,7 @@ except Exception as e:
     echo ""
   elif [ "$STATUS" = "analyzed" ]; then
     echo ""
-    echo "::notice::🦞 YanHui: New Analysis Complete (cost: \$$COST)"
+    echo "::notice::🦞 Confucius: New Analysis Complete (cost: \$$COST)"
     echo ""
     echo "============================================"
     echo "  Source: $SOURCE"
@@ -236,16 +247,16 @@ except Exception as e:
       echo ""
     fi
     echo "  $ATTRIBUTION"
-    echo "  (Saved to KB — next time anyone hits this, instant fix!)"
+    echo "  (Saved to YanHui KB — next time anyone hits this, instant fix!)"
     echo "============================================"
     echo ""
   elif [ "$STATUS" = "rejected" ]; then
     echo ""
-    echo "::warning::YanHui: This doesn't look like a bug. Please provide actual error messages."
+    echo "::warning::Confucius: This doesn't look like a bug. Please provide actual error messages."
     echo ""
   else
     echo ""
-    echo "::warning::YanHui returned unexpected status: $STATUS"
+    echo "::warning::Confucius returned unexpected status: $STATUS"
     echo ""
   fi
 
@@ -273,7 +284,7 @@ except: print('')
     if [ -n "$PR_NUMBER" ] && [ "$PR_NUMBER" != "0" ]; then
       echo "::group::Posting comment on PR #$PR_NUMBER"
 
-      # Check for existing YanHui comment (dedup)
+      # Check for existing comment (dedup) — supports both old and new markers
       EXISTING_COMMENT_ID=$(curl -s \
         -H "Authorization: token $GITHUB_TOKEN" \
         "https://api.github.com/repos/$GITHUB_REPOSITORY/issues/$PR_NUMBER/comments?per_page=100" \
@@ -282,7 +293,8 @@ import sys, json
 try:
     comments = json.load(sys.stdin)
     for c in comments:
-        if '## :lobster: YanHui Debug AI' in c.get('body', ''):
+        body = c.get('body', '')
+        if '## :lobster: Confucius Debug' in body or '## :lobster: YanHui Debug AI' in body:
             print(c['id'])
             break
 except: pass
@@ -306,7 +318,7 @@ attribution = os.environ.get('ATTRIBUTION', '')
 speed = 'Instant KB hit!' if status == 'knowledge_hit' else 'Fresh analysis'
 
 lines = []
-lines.append('## :lobster: YanHui Debug AI')
+lines.append('## :lobster: Confucius Debug')
 lines.append('')
 lines.append(f'**{speed}** | Source: \`{source}\` | Cost: \${cost}')
 lines.append('')
@@ -327,7 +339,7 @@ if entry_id:
     lines.append(f'> Entry #{entry_id} | Category: {category}')
 lines.append('')
 lines.append('---')
-lines.append('*Powered by [YanHui Debug AI](https://api.washinmura.jp/yanhui) — One Claw debugs, all Claws benefit*')
+lines.append('*Powered by [Confucius Debug](https://github.com/sstklen/confucius-debug) — never repeat a mistake 🦞*')
 
 print(json.dumps({'body': chr(10).join(lines)}))
 " 2>/dev/null)
@@ -358,7 +370,7 @@ print(json.dumps({'body': chr(10).join(lines)}))
 
 else
   # API error
-  echo "::warning::YanHui API returned HTTP $HTTP_CODE"
+  echo "::warning::Confucius API returned HTTP $HTTP_CODE"
   echo "status=error" >> "$GITHUB_OUTPUT"
   echo "fix=" >> "$GITHUB_OUTPUT"
 
@@ -369,7 +381,7 @@ else
   if [ "$HTTP_CODE" = "402" ]; then
     HINT=$(echo "$BODY" | python3 -c "import sys,json; print(json.load(sys.stdin).get('hint',''))" 2>/dev/null || echo "")
     echo ""
-    echo "::error::Insufficient balance. Top up at https://api.washinmura.jp/yanhui"
+    echo "::error::Insufficient balance. Get credits via: claude mcp add confucius-debug --transport http https://api.washinmura.jp/mcp/debug"
     if [ -n "$HINT" ]; then
       echo "::error::$HINT"
     fi
@@ -379,9 +391,9 @@ else
     echo "::warning::Rate limited. Wait a moment and retry."
   elif [ "$HTTP_CODE" = "000" ]; then
     echo ""
-    echo "::error::Could not reach YanHui API. Check your network or try again later."
+    echo "::error::Could not reach Confucius API. Check your network or try again later."
   fi
 fi
 
 echo ""
-echo "Done. Learn more: https://api.washinmura.jp/yanhui"
+echo "Done. Learn more: https://github.com/sstklen/confucius-debug"

@@ -1,29 +1,40 @@
 <p align="center">
-  <h1 align="center">🦞 YanHui — The Never-Repeat Knowledge Base</h1>
-  <p align="center"><strong>AI's shared mistake notebook — every bug solved once, never repeated.</strong></p>
+  <h1 align="center">🦞 Confucius Debug — AI Debugging That Never Repeats a Mistake</h1>
+  <p align="center"><strong>Search 1,100+ solved AI agent bugs instantly. No match? AI fixes it and saves to KB — next person gets it free.</strong></p>
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/Knowledge_Base-4,300+_Solutions-blue?style=for-the-badge" alt="4300+ Solutions"/>
-  <img src="https://img.shields.io/badge/KB_Hit-$0.02_·_4ms-green?style=for-the-badge" alt="KB Hit"/>
-  <img src="https://img.shields.io/badge/New_Fix-$0.05_·_6s-orange?style=for-the-badge" alt="New Fix"/>
+  <a href="https://github.com/sstklen/confucius-debug/actions"><img src="https://img.shields.io/badge/GitHub_Action-Marketplace-2088FF?style=for-the-badge&logo=github-actions&logoColor=white" alt="GitHub Action"/></a>
+  <a href="https://github.com/sstklen/confucius-debug/blob/main/LICENSE"><img src="https://img.shields.io/badge/License-MIT-yellow?style=for-the-badge" alt="MIT License"/></a>
+  <a href="#mcp-server"><img src="https://img.shields.io/badge/MCP-Server-brightgreen?style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJ3aGl0ZSI+PHBhdGggZD0iTTEyIDJDNi40OCAyIDIgNi40OCAyIDEyczQuNDggMTAgMTAgMTAgMTAtNC40OCAxMC0xMFMxNy41MiAyIDEyIDJ6bTAgMThjLTQuNDIgMC04LTMuNTgtOC04czMuNTgtOCA4LTggOCAzLjU4IDggOC0zLjU4IDgtOCA4eiIvPjwvc3ZnPg==" alt="MCP Server"/></a>
 </p>
 
 <p align="center">
-  <a href="https://github.com/sstklen/yanhui-ci/stargazers"><img src="https://img.shields.io/github/stars/sstklen/yanhui-ci?style=social" alt="Stars"/></a>
-  &nbsp;
-  <a href="https://github.com/marketplace/actions/yanhui-debug-ai"><strong>GitHub Action →</strong></a>
-  &nbsp;·&nbsp;
+  <img src="https://img.shields.io/badge/YanHui_KB-1,143_solutions-blue?style=for-the-badge" alt="1143 Solutions"/>
+  <img src="https://img.shields.io/badge/Search-FREE_·_~150ms-green?style=for-the-badge" alt="Search Free"/>
+  <img src="https://img.shields.io/badge/AI_Fix-$0.05_·_~6s-orange?style=for-the-badge" alt="AI Fix"/>
+  <img src="https://img.shields.io/badge/Accuracy-9/9_confirmed-brightgreen?style=for-the-badge" alt="9/9 Confirmed"/>
+</p>
+
+<p align="center">
   <a href="#mcp-server"><strong>MCP Server →</strong></a>
+  &nbsp;·&nbsp;
+  <a href="#github-action"><strong>GitHub Action →</strong></a>
+  &nbsp;·&nbsp;
+  <a href="#openclaw-skill"><strong>OpenClaw Skill →</strong></a>
+  &nbsp;·&nbsp;
+  <a href="#api"><strong>REST API →</strong></a>
 </p>
 
 ---
 
-## The Name
+## The Philosophy
 
-[Yan Hui (顏回)](https://en.wikipedia.org/wiki/Yan_Hui) was Confucius's favorite student. His master praised him: **「不遷怒，不貳過」** — *"Never redirect anger, never repeat a mistake."*
+> **「不貳過」** — *Never repeat a mistake.* (Confucius on his student Yan Hui, Analects 6.3)
 
-We turned that into a product: **once a bug is solved, nobody has to solve it again.**
+[Yan Hui (顏回)](https://en.wikipedia.org/wiki/Yan_Hui) was Confucius's favorite student — praised for never making the same mistake twice. We named our Knowledge Base after him: the **YanHui KB (不貳過知識庫)**.
+
+**Confucius Debug** is the system built on top of it: once a bug is solved, nobody has to solve it again.
 
 ---
 
@@ -31,90 +42,167 @@ We turned that into a product: **once a bug is solved, nobody has to solve it ag
 
 ```
 Your AI agent hits a bug
-     │
-     ▼
-Search KB ──── Found! → Instant fix ($0.02, ~4ms)
-     │
-     Not found
-     ▼
-AI analyzes & solves ($0.05, ~6s) → Saved to KB → Next time = instant
+       │
+       ▼
+  Search YanHui KB ──── Found! → Instant fix (FREE, ~150ms)
+       │
+       Not found
+       ▼
+  Confucius AI analyzes ($0.05, ~6s)
+       │
+       ▼
+  Fix saved to KB → Next person gets it FREE
 ```
-
-The more people use it, the bigger the KB gets, the more bugs are instant fixes.
 
 **Your bugs help everyone. Everyone's bugs help you.**
 
 ---
 
-## What Makes YanHui Different
+## What Makes It Different
 
-Most debug tools **wait for you to ask**. YanHui **proactively hunts bugs** across the open-source ecosystem — solving them before you even hit them.
+Most debug tools **wait for you to ask**. Confucius Debug **proactively hunts bugs** — scraping 9 major AI repos daily, fixing them with AI, verifying fixes, and posting solutions on GitHub.
 
-The Knowledge Base doesn't just grow from user queries. It grows continuously from the open-source community. By the time you encounter a bug, there's a good chance YanHui already has the fix.
+| What we do | Numbers |
+|------------|---------|
+| Daily automated scraping | 9 repos (OpenClaw, Claude Code, MCP SDK, Anthropic SDK, Aider, Codex...) |
+| Knowledge Base | **1,143** verified solutions (growing ~100/day) |
+| Platform specialties | **12** (MCP, Telegram, Docker, OpenAI, Ollama, Discord...) |
+| Fix quality (A-rate) | **80-100%** across all 12 platforms |
+| GitHub replies posted | **280** |
+| Confirmed correct | **9/9 = 100%** (0 corrections) |
+| Notable | OpenClaw creator [verified our fix](https://github.com/openclaw/openclaw/issues/2019) and closed the issue |
 
-**4,300+ verified solutions and growing daily.**
+**By the time you hit a bug, there's a good chance we already have the fix.**
 
 ---
 
 ## Install
 
-### MCP Server (for Claude Code / AI Agents) {#mcp-server}
+### MCP Server (Recommended) {#mcp-server}
+
+For **Claude Code**, **Claude Desktop**, or any MCP-compatible client:
 
 ```bash
-claude mcp add yanhui-debug --transport http https://api.washinmura.jp/mcp/debug -s user
+claude mcp add confucius-debug --transport http https://api.washinmura.jp/mcp/debug -s user
 ```
 
-Then tell Claude: *"Use debug_hello to set up"* — you get **10 free credits**.
+Or add to your MCP config:
 
-### GitHub Action (for CI/CD)
+```json
+{
+  "mcpServers": {
+    "confucius-debug": {
+      "url": "https://api.washinmura.jp/mcp/debug"
+    }
+  }
+}
+```
+
+Then tell your AI: *"Use debug_hello to set up"* — you get **10 free credits**.
+
+### GitHub Action {#github-action}
 
 ```yaml
-- name: YanHui Debug AI
+- name: Confucius Debug AI
   if: failure()
-  uses: sstklen/yanhui-ci@v1
+  uses: sstklen/confucius-debug@v1
   with:
-    claw-id: ${{ secrets.YANHUI_CLAW_ID }}
+    lobster-id: ${{ secrets.CONFUCIUS_LOBSTER_ID }}
 ```
 
-4 lines. When CI fails, YanHui posts the fix on your PR.
+4 lines. When CI fails, Confucius posts the fix on your PR.
+
+### OpenClaw Skill {#openclaw-skill}
+
+```
+"Help me install the Confucius Debug skill"
+```
+
+See [`skills/confucius-debug/SKILL.md`](skills/confucius-debug/SKILL.md) for full details.
+
+### REST API {#api}
+
+```bash
+# Search (always free)
+curl -X POST https://api.washinmura.jp/api/v2/debug-ai/search \
+  -H "Content-Type: application/json" \
+  -d '{"query": "Telegram bot 409 Conflict error", "limit": 5}'
+
+# AI analysis (when search returns nothing, $0.05)
+curl -X POST https://api.washinmura.jp/api/v2/debug-ai \
+  -H "Content-Type: application/json" \
+  -d '{"error_description": "...", "lobster_id": "your-id"}'
+```
 
 ---
 
-## 4 Tools (MCP Protocol)
+## 4 Tools
 
 | Tool | What it does | Cost |
 |------|-------------|------|
-| `debug_hello` | Scan your bug history, bulk-import to KB | Free + 10 credits |
-| `debug_search` | Search KB for existing solutions | Free |
+| `debug_search` | Search YanHui KB for existing solutions | **Free** |
 | `debug_analyze` | No match? AI solves it, saves to KB | $0.05 |
-| `debug_contribute` | Share your own solutions back | Free |
+| `debug_contribute` | Share your own solutions back | **Free** |
+| `debug_hello` | Scan your bug history, bulk-import to KB | **Free** + 10 credits |
 
 **Workflow:** `debug_hello` (once) → `debug_search` (always free) → `debug_analyze` (only if needed)
 
 ---
 
-## Pricing
+## Platform Coverage
 
-| Scenario | Cost | Speed |
-|----------|------|-------|
-| **KB hit** (already solved) | $0.02 | ~4ms |
-| **New analysis** (Sonnet) | $0.05 | ~6s |
-| **New analysis** (Opus) | $0.07 | ~8s |
-| **Search only** | Free | ~150ms |
+The YanHui KB specializes in AI agent bugs across 12 platforms:
 
-> **Free to start.** 10 credits on signup = 500 free debug sessions at $0.02 each.
+| Platform | Solutions | Quality (A-Rate) |
+|----------|-----------|-------------------|
+| Anthropic / Claude | 392 | 80% |
+| MCP (Model Context Protocol) | 261 | 87% |
+| Telegram | 101 | 97% |
+| Memory / RAG / Vector DB | 94 | 87% |
+| Browser / WebSocket | 73 | 92% |
+| OpenAI / GPT | 54 | 87% |
+| Docker / K8s | 51 | 84% |
+| Discord | 40 | 93% |
+| Cron / Scheduler | 37 | 92% |
+| WhatsApp | 16 | 94% |
+| Google / Gemini | 15 | 100% |
+| Ollama / Local LLM | 14 | 93% |
 
-**Contributors earn back.** Your solutions get cited by others → you earn per citation. The more you help, the more you earn.
+**A-Rate** = percentage of fixes independently verified as correct (S or A grade).
 
 ---
 
-## The Flywheel
+## How the KB Grows
+
+An automated pipeline runs daily:
 
 ```
-More bugs solved → KB grows → hit rate ↑ → cost ↓ → more users → more contributions → 🔄
+scrape (GitHub Issues) → verify → fix (AI analysis)
+    → import (vector KB) → reply (GitHub) → track → learn
 ```
 
-YanHui gets **better** over time, not worse. Every fix makes it smarter for everyone.
+| Stage | What happens |
+|-------|-------------|
+| **Scrape** | Pull new issues from 9 AI repos |
+| **Verify** | Grade existing solutions for quality |
+| **Fix** | AI generates fixes for unsolved bugs |
+| **Import** | Good fixes go into the YanHui KB (vector database) |
+| **Reply** | Post solutions on GitHub with smart filtering |
+| **Track** | Monitor community responses |
+| **Learn** | Extract lessons from corrections to improve |
+
+The KB grows by ~100 entries per day, automatically.
+
+---
+
+## Pricing
+
+| Action | Cost |
+|--------|------|
+| Search KB | **Free** |
+| Contribute to KB | **Free** |
+| AI analysis (Sonnet/Opus) | **$0.05** |
+| Onboarding (debug_hello) | **Free** + 10 credits gift |
 
 ---
 
@@ -123,21 +211,20 @@ YanHui gets **better** over time, not worse. Every fix makes it smarter for ever
 
 ### Quick Start (2 minutes)
 
-#### 1. Get a free Claw ID
+#### 1. Get a free Lobster ID
 
 ```bash
-claude mcp add yanhui-debug --transport http https://api.washinmura.jp/mcp/debug -s user
+claude mcp add confucius-debug --transport http https://api.washinmura.jp/mcp/debug -s user
 ```
 Tell Claude: *"Use debug_hello to onboard"* → 10 free credits.
 
 #### 2. Add to GitHub Secrets
 
-Repo → `Settings` → `Secrets` → Add `YANHUI_CLAW_ID`
+Repo → `Settings` → `Secrets` → Add `CONFUCIUS_LOBSTER_ID`
 
 #### 3. Add to workflow
 
 ```yaml
-# .github/workflows/ci.yml
 name: CI
 on: [push, pull_request]
 
@@ -152,11 +239,11 @@ jobs:
         run: npm run build 2>&1 | tee /tmp/build-error.log
         continue-on-error: true
 
-      - name: YanHui Debug AI
+      - name: Confucius Debug AI
         if: steps.build.outcome == 'failure'
-        uses: sstklen/yanhui-ci@v1
+        uses: sstklen/confucius-debug@v1
         with:
-          claw-id: ${{ secrets.YANHUI_CLAW_ID }}
+          lobster-id: ${{ secrets.CONFUCIUS_LOBSTER_ID }}
 
       - name: Fail if build failed
         if: steps.build.outcome == 'failure'
@@ -167,7 +254,7 @@ jobs:
 
 | Input | Required | Default | Description |
 |-------|----------|---------|-------------|
-| `claw-id` | Yes | - | Your Claw ID |
+| `lobster-id` | Yes | - | Your Lobster ID |
 | `error-log` | No | auto-capture | Custom error text |
 | `comment` | No | `true` | Post fix as PR comment |
 | `language` | No | `en` | Response language (en/zh/ja) |
@@ -178,7 +265,7 @@ jobs:
 |--------|-------------|
 | `status` | `knowledge_hit`, `analyzed`, or `error` |
 | `fix` | Full JSON response with fix details |
-| `source` | `knowledge_base`, `sonnet_4.6`, or `opus_local` |
+| `source` | `knowledge_base`, `sonnet`, or `opus` |
 | `cost` | Cost in USD |
 
 </details>
@@ -186,9 +273,17 @@ jobs:
 <details>
 <summary><b>Security & Privacy</b></summary>
 
-- **Zero privacy risk** — only stores error messages and fixes, never source code or secrets
-- **Automatic redaction** — API keys, tokens, passwords filtered before sending
-- **Minimal data** — only last 50 lines of error output captured
+### What leaves your machine
+Only the error description and error message you provide. No source code, no file contents, no environment variables.
+
+### What's stored
+Error descriptions and fixes in the YanHui KB. No PII beyond your chosen lobster-id.
+
+### Automatic redaction
+API keys, tokens, and passwords are filtered before sending.
+
+### Data retention
+Contributions are permanent — that's the point. Never repeat a mistake.
 
 </details>
 
@@ -198,14 +293,15 @@ jobs:
 
 | Project | What it does |
 |---------|-------------|
-| [112 Claude Code Skills](https://github.com/sstklen/washin-claude-skills) | Battle-tested code patterns — YanHui's companion |
-| [crawl-share](https://github.com/sstklen/crawl-share) | Community web intelligence — same philosophy |
-| [Zero Engineer](https://github.com/sstklen/zero-engineer) | The full story behind all of this |
+| [112 Claude Code Skills](https://github.com/sstklen/washin-claude-skills) | Battle-tested coding patterns |
+| [Zero Engineer](https://github.com/sstklen/zero-engineer) | How a non-engineer built all of this with AI |
 
 ---
 
 <p align="center">
-  <i>「不遷怒，不貳過。」</i><br>
-  <i>"Never repeat a mistake."</i><br><br>
-  <sub>Built at <a href="https://washinmura.jp">Washin Village</a> (和心村) — an animal sanctuary in Japan, 28 cats & dogs 🐾</sub>
+  <b>「不遷怒，不貳過。」</b><br>
+  <i>"Never redirect anger, never repeat a mistake."</i><br><br>
+  Built at <a href="https://washinmura.jp">Washin Village (和心村)</a> — an animal sanctuary in Japan, 28 cats & dogs 🐾<br>
+  Powered by Claude (Anthropic) + the Confucius philosophy.<br><br>
+  🦞 <i>The bigger the Knowledge Base, the stronger Confucius becomes.</i>
 </p>

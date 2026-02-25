@@ -1,0 +1,84 @@
+# Confucius Debug
+
+> AI-powered debugging for CI/CD pipelines and AI agents. Search 1,100+ solved bugs instantly (free), or get AI analysis for $0.05.
+
+## What is Confucius Debug?
+
+Confucius Debug is an AI debugging tool inspired by Confucius's student Yan Hui, who never repeated a mistake. It maintains a Knowledge Base (YanHui KB) of 1,100+ solved AI agent bugs across 12 platforms.
+
+## Quick Start
+
+### MCP Server (for Claude Code, Claude Desktop, or any MCP client)
+
+```bash
+claude mcp add confucius-debug --transport http https://api.washinmura.jp/mcp/debug -s user
+```
+
+Or add to MCP config:
+
+```json
+{
+  "mcpServers": {
+    "confucius-debug": {
+      "url": "https://api.washinmura.jp/mcp/debug"
+    }
+  }
+}
+```
+
+### GitHub Action (4 lines)
+
+```yaml
+- name: Confucius Debug AI
+  if: failure()
+  uses: sstklen/confucius-debug@v2
+  with:
+    lobster-id: ${{ secrets.CONFUCIUS_LOBSTER_ID }}
+```
+
+### REST API
+
+```bash
+# Search (always free)
+curl -X POST https://api.washinmura.jp/api/v2/debug-ai/search \
+  -H "Content-Type: application/json" \
+  -d '{"query": "your error message", "limit": 5}'
+
+# AI analysis ($0.05, only when search returns nothing)
+curl -X POST https://api.washinmura.jp/api/v2/debug-ai \
+  -H "Content-Type: application/json" \
+  -d '{"error_description": "...", "lobster_id": "your-id"}'
+```
+
+## 4 MCP Tools
+
+| Tool | What it does | Cost |
+|------|-------------|------|
+| debug_search | Search YanHui KB for existing solutions | Free |
+| debug_analyze | AI solves new bugs, saves to KB | $0.05 |
+| debug_contribute | Share your own solutions back | Free |
+| debug_hello | Scan your bug history, bulk-import to KB | Free + 10 credits |
+
+Workflow: debug_hello (once) → debug_search (always free) → debug_analyze (only if needed)
+
+## Platform Coverage (12 platforms, all ≥ 80% accuracy)
+
+Anthropic/Claude (392 bugs, 80%), MCP (261, 87%), Telegram (101, 97%), Memory/RAG (94, 87%), Browser (73, 92%), OpenAI/GPT (54, 87%), Docker (51, 84%), Discord (40, 93%), Cron (37, 92%), WhatsApp (16, 94%), Google/Gemini (15, 100%), Ollama (14, 93%).
+
+## Pricing
+
+- Search KB: Free
+- Contribute to KB: Free
+- AI analysis: $0.05
+- Onboarding (debug_hello): Free + 10 credits gift
+
+## Links
+
+- GitHub: https://github.com/sstklen/confucius-debug
+- API: https://api.washinmura.jp/api/v2/debug-ai
+- MCP: https://api.washinmura.jp/mcp/debug
+- Website: https://washinmura.jp
+
+## About
+
+Built by Washin Village (和心村) — an animal sanctuary on the Boso Peninsula, Japan, caring for 28 cats and dogs. MIT License.
