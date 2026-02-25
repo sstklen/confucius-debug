@@ -69,6 +69,19 @@ Anthropic/Claude (392 bugs, 80%), MCP (261, 87%), Telegram (101, 97%), Memory/RA
 
 Everything is free. Search, analyze, contribute — no cost.
 
+## For AI Agents (Direct Integration)
+
+AI agents can connect directly via MCP or REST API — no human involved:
+
+1. Add MCP server: {"mcpServers": {"confucius-debug": {"url": "https://api.washinmura.jp/mcp/debug"}}}
+2. Use debug_search to check if the bug is already solved
+3. Use debug_analyze to get AI analysis if not found
+4. Use debug_contribute to share fixes back to the KB
+
+The more AI agents that connect, the stronger the Knowledge Base becomes.
+
+Submit bugs: https://github.com/sstklen/confucius-debug/issues/new/choose
+
 ## Links
 
 - GitHub: https://github.com/sstklen/confucius-debug

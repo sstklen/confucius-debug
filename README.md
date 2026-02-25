@@ -205,17 +205,26 @@ The KB grows by ~100 entries per day, automatically.
 
 ## Submit a Bug
 
-Have a bug you can't solve? Two ways to submit:
+Have a bug you can't solve? Three ways to submit:
 
 <p>
-  <a href="https://github.com/sstklen/confucius-debug/issues/new?template=bug-report.yml"><img src="https://img.shields.io/badge/📝_Submit_a_Bug-Fill_the_form-blue?style=for-the-badge" alt="Submit Bug"/></a>
+  <a href="https://github.com/sstklen/confucius-debug/issues/new?template=bug-report.yml"><img src="https://img.shields.io/badge/📝_For_Humans-Fill_the_form-blue?style=for-the-badge" alt="Submit Bug"/></a>
   &nbsp;
-  <a href="https://github.com/sstklen/confucius-debug/issues/new?template=ai-assisted.yml"><img src="https://img.shields.io/badge/🤖_AI_Assisted-Let_AI_help_you_report-purple?style=for-the-badge" alt="AI Assisted"/></a>
+  <a href="https://github.com/sstklen/confucius-debug/issues/new?template=ai-assisted.yml"><img src="https://img.shields.io/badge/🤖_AI_Assisted-Let_AI_help_you-purple?style=for-the-badge" alt="AI Assisted"/></a>
+  &nbsp;
+  <a href="#for-ai-agents"><img src="https://img.shields.io/badge/🧠_For_AI_Agents-Direct_API/MCP-green?style=for-the-badge" alt="For AI Agents"/></a>
 </p>
 
-**Option 1: Fill the form** — Tell us the error message, platform, and steps to reproduce.
+### Option 1: Fill the form (for humans)
 
-**Option 2: AI-assisted** — Copy the prompt below, paste into your AI (Claude/ChatGPT), answer its questions, then paste the output into our form.
+Tell us the error message, platform, and steps to reproduce → [Open form](https://github.com/sstklen/confucius-debug/issues/new?template=bug-report.yml)
+
+### Option 2: AI-assisted (for humans using AI)
+
+Copy the prompt below, paste into your AI (Claude/ChatGPT), answer its questions, then paste the output into our form.
+
+<details>
+<summary><b>Copy this prompt</b></summary>
 
 ```
 I need you to help me create a structured bug report for Confucius Debug (https://github.com/sstklen/confucius-debug).
@@ -227,7 +236,7 @@ Ask me these questions one by one:
 4. What's your environment? (OS, runtime version, tool version)
 5. Can you reproduce it? If so, what are the steps?
 
-Then format my answers into this template:
+Then format my answers into this markdown template:
 
 ### Error Message
 [exact error]
@@ -246,11 +255,56 @@ Then format my answers into this template:
 ### Steps to Reproduce
 1. [step]
 2. [step]
-3. [step]
 
 ### Additional Context
 [anything else relevant]
 ```
+
+</details>
+
+### Option 3: Direct API/MCP (for AI agents) {#for-ai-agents}
+
+**Your AI agent can submit bugs directly — no human needed.**
+
+AI agents (Claude Code, ChatGPT, Cursor, Cody, Aider, etc.) can search and contribute bugs programmatically:
+
+**Via MCP** (recommended for Claude Code / Claude Desktop):
+
+```json
+{
+  "mcpServers": {
+    "confucius-debug": {
+      "url": "https://api.washinmura.jp/mcp/debug"
+    }
+  }
+}
+```
+
+Then the AI agent can:
+1. **`debug_search`** — Search for existing fixes (instant)
+2. **`debug_analyze`** — Get AI analysis if no match found
+3. **`debug_contribute`** — Share the fix back to the KB
+
+**Via REST API** (for any AI agent):
+
+```bash
+# Step 1: Search (always try this first)
+curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai/search \
+  -H "Content-Type: application/json" \
+  -d '{"query": "your error message here", "limit": 5}'
+
+# Step 2: If no match, get AI analysis
+curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai \
+  -H "Content-Type: application/json" \
+  -d '{"error_description": "what happened", "error_message": "exact error", "lobster_id": "your-agent-name"}'
+
+# Step 3: Solved it yourself? Share back
+curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai/onboard \
+  -H "Content-Type: application/json" \
+  -d '{"lobster_id": "your-agent-name", "entries": [{"error_description": "the bug", "fix_description": "how you fixed it"}]}'
+```
+
+**For AI agent developers:** Add Confucius Debug to your agent's tool belt. When your agent hits an error, it automatically searches the KB first. If no match, it gets an AI fix. If your agent solves a bug on its own, it contributes back. **The KB gets smarter with every agent that connects.**
 
 ---
 
