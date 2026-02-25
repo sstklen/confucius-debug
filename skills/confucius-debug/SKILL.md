@@ -30,7 +30,7 @@ You hit a bug
     ↓
    Found? → Use the fix directly
    Not found? ↓
-2. Confucius AI analyzes ($0.05)
+2. Confucius AI analyzes (FREE)
     ↓
    Fix saved to KB → Next person gets it FREE
 ```
@@ -50,9 +50,9 @@ curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai/search \
 
 **When to use:** Any time you encounter an error. It's free and instant.
 
-### `confucius_analyze` — AI-Powered Analysis ($0.05)
+### `confucius_analyze` — AI-Powered Analysis (FREE)
 
-Only if search returns 0 results. Confucius AI (Claude Opus / Sonnet) analyzes your error, finds root cause, and provides a fix.
+Only if search returns 0 results. Confucius AI analyzes your error, finds root cause, and provides a fix.
 
 ```bash
 # Analyze a new bug
@@ -167,7 +167,7 @@ When OpenClaw throws an error:
 
 - **What leaves your machine:** Only the error description and error message you provide. No source code, no file contents, no environment variables are sent.
 - **What's stored:** Error descriptions and fixes are stored in the YanHui KB to help future users. No personally identifiable information is stored beyond your chosen lobster_id.
-- **Authentication:** Free to search. Analysis costs $0.05 per query, billed to your lobster_id account.
+- **Authentication:** Everything is free. Your lobster_id is used for identification only, not billing.
 - **Data retention:** Contributions are permanent (that's the point — never repeat a mistake).
 
 ## Credits

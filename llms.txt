@@ -1,6 +1,6 @@
 # Confucius Debug
 
-> AI-powered debugging for CI/CD pipelines and AI agents. Search 1,100+ solved bugs instantly (free), or get AI analysis for $0.05.
+> AI-powered debugging for CI/CD pipelines and AI agents. Search 1,100+ solved bugs instantly — everything is free.
 
 ## What is Confucius Debug?
 
@@ -44,7 +44,7 @@ curl -X POST https://api.washinmura.jp/api/v2/debug-ai/search \
   -H "Content-Type: application/json" \
   -d '{"query": "your error message", "limit": 5}'
 
-# AI analysis ($0.05, only when search returns nothing)
+# AI analysis (free, only when search returns nothing)
 curl -X POST https://api.washinmura.jp/api/v2/debug-ai \
   -H "Content-Type: application/json" \
   -d '{"error_description": "...", "lobster_id": "your-id"}'
@@ -55,7 +55,7 @@ curl -X POST https://api.washinmura.jp/api/v2/debug-ai \
 | Tool | What it does | Cost |
 |------|-------------|------|
 | debug_search | Search YanHui KB for existing solutions | Free |
-| debug_analyze | AI solves new bugs, saves to KB | $0.05 |
+| debug_analyze | AI solves new bugs, saves to KB | Free |
 | debug_contribute | Share your own solutions back | Free |
 | debug_hello | Scan your bug history, bulk-import to KB | Free + 10 credits |
 
@@ -67,10 +67,7 @@ Anthropic/Claude (392 bugs, 80%), MCP (261, 87%), Telegram (101, 97%), Memory/RA
 
 ## Pricing
 
-- Search KB: Free
-- Contribute to KB: Free
-- AI analysis: $0.05
-- Onboarding (debug_hello): Free + 10 credits gift
+Everything is free. Search, analyze, contribute — no cost.
 
 ## Links
 

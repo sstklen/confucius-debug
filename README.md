@@ -12,7 +12,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/YanHui_KB-1,143_solutions-blue?style=for-the-badge" alt="1143 Solutions"/>
   <img src="https://img.shields.io/badge/Search-FREE_·_~150ms-green?style=for-the-badge" alt="Search Free"/>
-  <img src="https://img.shields.io/badge/AI_Fix-$0.05_·_~6s-orange?style=for-the-badge" alt="AI Fix"/>
+  <img src="https://img.shields.io/badge/AI_Fix-FREE_·_~6s-orange?style=for-the-badge" alt="AI Fix Free"/>
   <img src="https://img.shields.io/badge/Accuracy-9/9_confirmed-brightgreen?style=for-the-badge" alt="9/9 Confirmed"/>
 </p>
 
@@ -24,6 +24,8 @@
   <a href="#openclaw-skill"><strong>OpenClaw Skill →</strong></a>
   &nbsp;·&nbsp;
   <a href="#api"><strong>REST API →</strong></a>
+  &nbsp;·&nbsp;
+  <a href="https://github.com/sstklen/confucius-debug/issues/new/choose"><strong>Submit Bug →</strong></a>
 </p>
 
 ---
@@ -48,7 +50,7 @@ Your AI agent hits a bug
        │
        Not found
        ▼
-  Confucius AI analyzes ($0.05, ~6s)
+  Confucius AI analyzes (FREE, ~6s)
        │
        ▼
   Fix saved to KB → Next person gets it FREE
@@ -105,7 +107,7 @@ Then tell your AI: *"Use debug_hello to set up"* — you get **10 free credits**
 ```yaml
 - name: Confucius Debug AI
   if: failure()
-  uses: sstklen/confucius-debug@v1
+  uses: sstklen/confucius-debug@v2
   with:
     lobster-id: ${{ secrets.CONFUCIUS_LOBSTER_ID }}
 ```
@@ -128,7 +130,7 @@ curl -X POST https://api.washinmura.jp/api/v2/debug-ai/search \
   -H "Content-Type: application/json" \
   -d '{"query": "Telegram bot 409 Conflict error", "limit": 5}'
 
-# AI analysis (when search returns nothing, $0.05)
+# AI analysis (when search returns nothing, free)
 curl -X POST https://api.washinmura.jp/api/v2/debug-ai \
   -H "Content-Type: application/json" \
   -d '{"error_description": "...", "lobster_id": "your-id"}'
@@ -141,7 +143,7 @@ curl -X POST https://api.washinmura.jp/api/v2/debug-ai \
 | Tool | What it does | Cost |
 |------|-------------|------|
 | `debug_search` | Search YanHui KB for existing solutions | **Free** |
-| `debug_analyze` | No match? AI solves it, saves to KB | $0.05 |
+| `debug_analyze` | No match? AI solves it, saves to KB | **Free** |
 | `debug_contribute` | Share your own solutions back | **Free** |
 | `debug_hello` | Scan your bug history, bulk-import to KB | **Free** + 10 credits |
 
@@ -197,12 +199,58 @@ The KB grows by ~100 entries per day, automatically.
 
 ## Pricing
 
-| Action | Cost |
-|--------|------|
-| Search KB | **Free** |
-| Contribute to KB | **Free** |
-| AI analysis (Sonnet/Opus) | **$0.05** |
-| Onboarding (debug_hello) | **Free** + 10 credits gift |
+**Everything is free.** Search, analyze, contribute — no cost.
+
+---
+
+## Submit a Bug
+
+Have a bug you can't solve? Two ways to submit:
+
+<p>
+  <a href="https://github.com/sstklen/confucius-debug/issues/new?template=bug-report.yml"><img src="https://img.shields.io/badge/📝_Submit_a_Bug-Fill_the_form-blue?style=for-the-badge" alt="Submit Bug"/></a>
+  &nbsp;
+  <a href="https://github.com/sstklen/confucius-debug/issues/new?template=ai-assisted.yml"><img src="https://img.shields.io/badge/🤖_AI_Assisted-Let_AI_help_you_report-purple?style=for-the-badge" alt="AI Assisted"/></a>
+</p>
+
+**Option 1: Fill the form** — Tell us the error message, platform, and steps to reproduce.
+
+**Option 2: AI-assisted** — Copy the prompt below, paste into your AI (Claude/ChatGPT), answer its questions, then paste the output into our form.
+
+```
+I need you to help me create a structured bug report for Confucius Debug (https://github.com/sstklen/confucius-debug).
+
+Ask me these questions one by one:
+1. What error message or unexpected behavior did you see? (paste the exact error)
+2. What were you trying to do when this happened?
+3. What platform/tool is involved? (e.g., Claude Code, MCP, Telegram, Docker, OpenAI, Discord, etc.)
+4. What's your environment? (OS, runtime version, tool version)
+5. Can you reproduce it? If so, what are the steps?
+
+Then format my answers into this template:
+
+### Error Message
+[exact error]
+
+### What I Was Doing
+[context]
+
+### Platform
+[platform name]
+
+### Environment
+- OS: [os]
+- Runtime: [version]
+- Tool: [version]
+
+### Steps to Reproduce
+1. [step]
+2. [step]
+3. [step]
+
+### Additional Context
+[anything else relevant]
+```
 
 ---
 
@@ -241,7 +289,7 @@ jobs:
 
       - name: Confucius Debug AI
         if: steps.build.outcome == 'failure'
-        uses: sstklen/confucius-debug@v1
+        uses: sstklen/confucius-debug@v2
         with:
           lobster-id: ${{ secrets.CONFUCIUS_LOBSTER_ID }}
 
@@ -266,7 +314,7 @@ jobs:
 | `status` | `knowledge_hit`, `analyzed`, or `error` |
 | `fix` | Full JSON response with fix details |
 | `source` | `knowledge_base`, `sonnet`, or `opus` |
-| `cost` | Cost in USD |
+| `cost` | Cost in USD (always 0 — everything is free) |
 
 </details>
 

@@ -1,0 +1,88 @@
+name: "Bug Report"
+description: "Submit a bug for Confucius to solve. We'll add the fix to our Knowledge Base so nobody hits it again."
+title: "[Bug]: "
+labels: ["bug", "community"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## Submit a Bug to Confucius Debug
+
+        Thanks for contributing! Once we solve your bug, the fix goes into the YanHui KB — so the next person who hits it gets an instant answer.
+
+        **Tip:** Not sure how to describe your bug? Use our [AI-assisted template](https://github.com/sstklen/confucius-debug/issues/new?template=ai-assisted.yml) instead — paste a prompt into ChatGPT/Claude and it'll help you write a great report.
+
+  - type: textarea
+    id: error-message
+    attributes:
+      label: Error Message
+      description: "Paste the exact error message, stack trace, or unexpected output."
+      placeholder: |
+        Error: ETELEGRAM: 409 Conflict: terminated by other getUpdates request
+        at TelegramBot._request (/app/node_modules/node-telegram-bot-api/src/telegram.js:326:13)
+    validations:
+      required: true
+
+  - type: dropdown
+    id: platform
+    attributes:
+      label: Platform
+      description: "Which platform or tool is involved?"
+      options:
+        - "Claude / Anthropic"
+        - "MCP (Model Context Protocol)"
+        - "Telegram"
+        - "OpenAI / GPT"
+        - "Docker / K8s"
+        - "Discord"
+        - "Memory / RAG / Vector DB"
+        - "Browser / WebSocket"
+        - "Cron / Scheduler"
+        - "WhatsApp"
+        - "Google / Gemini"
+        - "Ollama / Local LLM"
+        - "Other (describe below)"
+    validations:
+      required: true
+
+  - type: textarea
+    id: context
+    attributes:
+      label: What were you trying to do?
+      description: "Brief description of what you were doing when the error happened."
+      placeholder: "I was trying to deploy my Telegram bot using Docker Compose..."
+    validations:
+      required: true
+
+  - type: textarea
+    id: environment
+    attributes:
+      label: Environment
+      description: "OS, runtime version, tool version, etc."
+      placeholder: |
+        - OS: Ubuntu 22.04
+        - Node.js: v20.11.0
+        - Docker: 24.0.7
+    validations:
+      required: false
+
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to Reproduce
+      description: "How can we reproduce this? (if known)"
+      placeholder: |
+        1. Clone the repo
+        2. Run `docker compose up`
+        3. Send a message to the bot
+        4. See error in logs
+    validations:
+      required: false
+
+  - type: textarea
+    id: extra
+    attributes:
+      label: Additional Context
+      description: "Anything else? Config files, screenshots, related issues, things you already tried."
+    validations:
+      required: false

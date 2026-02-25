@@ -4,10 +4,10 @@
 # ============================================
 #
 # Security Manifest:
-#   ENV accessed: CONFUCIUS_LOBSTER_ID (required, for billing)
+#   ENV accessed: CONFUCIUS_LOBSTER_ID (required, for identification)
 #   External endpoints: https://api.washinmura.jp/api/v2/debug-ai
 #   Files: none (read-only API call)
-#   Side effects: solution saved to YanHui KB, $0.05 deducted
+#   Side effects: solution saved to YanHui KB (free)
 #
 # Usage:
 #   bash analyze.sh "error description" "optional: error message/stack trace"
@@ -19,8 +19,7 @@ MSG="${2:-}"
 LOBSTER_ID="${CONFUCIUS_LOBSTER_ID:?Set CONFUCIUS_LOBSTER_ID env var first}"
 API_URL="https://api.washinmura.jp/api/v2/debug-ai"
 
-echo "🧙 Confucius is analyzing..."
-echo "   Cost: \$0.05"
+echo "🧙 Confucius is analyzing... (free)"
 echo ""
 
 BODY=$(jq -n \

@@ -31,7 +31,7 @@ HITS=$(echo "$RESPONSE" | jq -r '.results // [] | length' 2>/dev/null || echo "0
 if [ "$HITS" = "0" ]; then
   echo "❌ No matches found in YanHui KB."
   echo ""
-  echo "💡 Try: confucius_analyze to get AI-powered analysis (\$0.05)"
+  echo "💡 Try: confucius_analyze to get free AI-powered analysis"
 else
   echo "✅ Found $HITS matches:"
   echo ""

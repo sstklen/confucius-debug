@@ -109,7 +109,7 @@ stats = [
     ("1,143", "Solved Bugs in KB"),
     ("12", "Platform Specialties"),
     ("FREE", "Search (instant)"),
-    ("$0.05", "AI Analysis"),
+    ("FREE", "AI Analysis"),
 ]
 
 x_start = 60

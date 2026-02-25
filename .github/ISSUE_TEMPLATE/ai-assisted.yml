@@ -1,0 +1,86 @@
+name: "AI-Assisted Bug Report"
+description: "Let your AI (Claude/ChatGPT) help you write a structured bug report. Just paste the output here."
+title: "[Bug]: "
+labels: ["bug", "community", "ai-assisted"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        ## AI-Assisted Bug Report
+
+        **Step 1:** Copy the prompt below and paste it into your AI (Claude, ChatGPT, Gemini, etc.)
+        **Step 2:** Answer the AI's questions about your bug
+        **Step 3:** Copy the AI's formatted output and paste it below
+
+        ---
+
+        ### Prompt to copy:
+
+        ```
+        I need you to help me create a structured bug report for Confucius Debug
+        (https://github.com/sstklen/confucius-debug).
+
+        Ask me these questions one by one:
+        1. What error message or unexpected behavior did you see? (paste the exact error)
+        2. What were you trying to do when this happened?
+        3. What platform/tool is involved? (Claude, MCP, Telegram, Docker, OpenAI, Discord, etc.)
+        4. What's your environment? (OS, runtime version, tool version)
+        5. Can you reproduce it? If so, what are the steps?
+
+        Then format my answers into this markdown template:
+
+        ### Error Message
+        [exact error]
+
+        ### What I Was Doing
+        [context]
+
+        ### Platform
+        [platform name]
+
+        ### Environment
+        - OS: [os]
+        - Runtime: [version]
+        - Tool: [version]
+
+        ### Steps to Reproduce
+        1. [step]
+        2. [step]
+
+        ### Additional Context
+        [anything else]
+        ```
+
+  - type: textarea
+    id: ai-output
+    attributes:
+      label: AI-Generated Bug Report
+      description: "Paste the output from your AI here."
+      placeholder: |
+        ### Error Message
+        Error: ETELEGRAM: 409 Conflict...
+
+        ### What I Was Doing
+        Deploying my Telegram bot...
+
+        ### Platform
+        Telegram
+
+        ### Environment
+        - OS: Ubuntu 22.04
+        - Runtime: Node.js v20
+        - Tool: node-telegram-bot-api v0.64
+
+        ### Steps to Reproduce
+        1. Start the bot
+        2. ...
+    validations:
+      required: true
+
+  - type: textarea
+    id: raw-error
+    attributes:
+      label: Raw Error (optional)
+      description: "If you have the full stack trace or log output, paste it here too."
+    validations:
+      required: false
