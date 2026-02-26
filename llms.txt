@@ -1,10 +1,10 @@
 # Confucius Debug
 
-> AI-powered debugging for CI/CD pipelines and AI agents. Search 1,100+ solved bugs instantly — everything is free.
+> AI-powered debugging for CI/CD pipelines and AI agents. 6,800+ scraped issues, 980+ imported solutions — everything is free.
 
 ## What is Confucius Debug?
 
-Confucius Debug is an AI debugging tool inspired by Confucius's student Yan Hui, who never repeated a mistake. It maintains a Knowledge Base (YanHui KB) of 1,100+ solved AI agent bugs across 12 platforms.
+Confucius Debug is an AI debugging tool inspired by Confucius's student Yan Hui, who never repeated a mistake. It scrapes 9 major AI repos daily and maintains a Knowledge Base (YanHui KB) of 6,800+ scraped issues and 980+ verified solutions across 12 platforms.
 
 ## Quick Start
 

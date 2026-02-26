@@ -1,11 +1,16 @@
 ---
 name: confucius-debug
-description: AI debugging assistant that never repeats a mistake. Searches the YanHui Knowledge Base (1000+ solved AI agent bugs) for instant fixes, or analyzes new errors with Confucius AI. Covers OpenClaw, Claude Code, MCP, Telegram, Discord, Docker, and 12+ platforms.
-version: 1.0.0
+description: AI debugging assistant that never repeats a mistake. Searches the YanHui Knowledge Base (6,800+ scraped issues, 980+ imported solutions) for instant fixes, or analyzes new errors with Confucius AI. Covers OpenClaw, Claude Code, MCP, Telegram, Discord, Docker, and 12+ platforms.
+version: 2.0.0
 emoji: 🦞
+tags:
+  - debugging
+  - ai-agent
+  - mcp
+  - knowledge-base
 
 metadata:
-  clawdbot:
+  openclaw:
     homepage: https://api.washinmura.jp/confucius
     primaryEnv: CONFUCIUS_LOBSTER_ID
     requires:
@@ -19,7 +24,7 @@ metadata:
 
 > *"不貳過" — Never repeat a mistake.* (Confucius, Analects 6.3)
 
-AI-powered debugging assistant backed by the **YanHui Knowledge Base** — a growing collection of 1,000+ solved bugs from real AI agent projects (OpenClaw, Claude Code, MCP, Anthropic SDK, and more).
+AI-powered debugging assistant backed by the **YanHui Knowledge Base** — a growing collection of 6,800+ scraped issues and 980+ imported solutions from real AI agent projects (OpenClaw, Claude Code, MCP, Anthropic SDK, Codex, Aider, and more).
 
 ## How It Works
 
@@ -39,7 +44,7 @@ You hit a bug
 
 ### `confucius_search` — Search the Knowledge Base (FREE)
 
-Always try this first. Searches 1,000+ solved bugs for matching patterns.
+Always try this first. Searches 980+ verified solutions for matching patterns.
 
 ```bash
 # Search for a bug pattern

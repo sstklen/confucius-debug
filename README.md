@@ -1,6 +1,6 @@
 <p align="center">
   <h1 align="center">🦞 Confucius Debug — AI Debugging That Never Repeats a Mistake</h1>
-  <p align="center"><strong>Search 1,100+ solved AI agent bugs instantly. No match? AI fixes it and saves to KB — next person gets it free.</strong></p>
+  <p align="center"><strong>6,800+ scraped issues · 980+ imported solutions · Search instantly. No match? AI fixes it and saves to KB — next person gets it free.</strong></p>
 </p>
 
 <p align="center">
@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/YanHui_KB-1,143_solutions-blue?style=for-the-badge" alt="1143 Solutions"/>
+  <img src="https://img.shields.io/badge/YanHui_KB-6,800+_issues_·_980+_solutions-blue?style=for-the-badge" alt="6800+ Issues"/>
   <img src="https://img.shields.io/badge/Search-FREE_·_~150ms-green?style=for-the-badge" alt="Search Free"/>
   <img src="https://img.shields.io/badge/AI_Fix-FREE_·_~6s-orange?style=for-the-badge" alt="AI Fix Free"/>
   <img src="https://img.shields.io/badge/Accuracy-9/9_confirmed-brightgreen?style=for-the-badge" alt="9/9 Confirmed"/>
@@ -67,10 +67,11 @@ Most debug tools **wait for you to ask**. Confucius Debug **proactively hunts bu
 | What we do | Numbers |
 |------------|---------|
 | Daily automated scraping | 9 repos (OpenClaw, Claude Code, MCP SDK, Anthropic SDK, Aider, Codex...) |
-| Knowledge Base | **1,143** verified solutions (growing ~100/day) |
+| Issues scraped | **6,800+** from 4 shards |
+| Imported solutions | **980+** verified and searchable |
 | Platform specialties | **12** (MCP, Telegram, Docker, OpenAI, Ollama, Discord...) |
-| Fix quality (A-rate) | **80-100%** across all 12 platforms |
-| GitHub replies posted | **280** |
+| Fix quality (A-rate) | **79%** overall (S+A grade) |
+| GitHub replies posted | **252** |
 | Confirmed correct | **9/9 = 100%** (0 corrections) |
 | Notable | OpenClaw creator [verified our fix](https://github.com/openclaw/openclaw/issues/2019) and closed the issue |
 
@@ -269,7 +270,7 @@ Then format my answers into this markdown template:
 ```
 How AI agents find us:
 
-GitHub Issues ─── We already reply on 9 major repos (280+ replies)
+GitHub Issues ─── We already reply on 9 major repos (250+ replies)
     │              → AI agents see our fixes → follow the link → connect
     │
 OpenClaw ──────── Confucius Debug Skill in the Skill Library
