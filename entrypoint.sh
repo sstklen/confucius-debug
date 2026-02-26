@@ -160,6 +160,7 @@ if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
   # 解析 API 回傳（安全方式：寫入暫存檔，避免 eval 注入風險）
   PARSE_FILE=$(mktemp)
   export PARSE_FILE
+  # shellcheck disable=SC1083,SC2016
   echo "$BODY" | python3 -c "
 import sys, json, shlex, os
 try:
@@ -183,8 +184,9 @@ try:
             f.write(f'{k}={shlex.quote(v)}\n')
 except Exception:
     with open(os.environ['PARSE_FILE'], 'w') as f:
-        NL = chr(10)
-        f.write(f"STATUS='unknown'{NL}SOURCE='unknown'{NL}COST='0'{NL}ENTRY_ID=''{NL}FIX_DESC=''{NL}FIX_PATCH=''{NL}ROOT_CAUSE=''{NL}CATEGORY=''{NL}ATTRIBUTION=''{NL}")
+        for kv in ['STATUS=unknown','SOURCE=unknown','COST=0','ENTRY_ID=','FIX_DESC=','FIX_PATCH=','ROOT_CAUSE=','CATEGORY=','ATTRIBUTION=']:
+            k,v = kv.split('=',1)
+            f.write(k + '=' + chr(39) + v + chr(39) + chr(10))
 " 2>/dev/null
   # 驗證暫存檔只包含合法的 shell 變數賦值
   if grep -qvE '^[A-Z_]+=' "$PARSE_FILE" 2>/dev/null; then
