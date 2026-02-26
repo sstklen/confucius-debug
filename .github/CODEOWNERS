@@ -1,0 +1,12 @@
+# Confucius Debug — Code Owners
+# These users will be automatically requested for review on PRs
+
+# Default owner for everything
+* @sstklen
+
+# GitHub Action
+action.yml @sstklen
+entrypoint.sh @sstklen
+
+# Community maintainers (add trusted contributors here)
+# Example: scripts/ @maintainer-username
