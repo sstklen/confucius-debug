@@ -158,7 +158,8 @@ echo "::endgroup::"
 
 if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
   # 解析 API 回傳（安全方式：寫入暫存檔，避免 eval 注入風險）
-  export PARSE_FILE=$(mktemp)
+  PARSE_FILE=$(mktemp)
+  export PARSE_FILE
   echo "$BODY" | python3 -c "
 import sys, json, shlex, os
 try:
@@ -182,13 +183,15 @@ try:
             f.write(f'{k}={shlex.quote(v)}\n')
 except Exception:
     with open(os.environ['PARSE_FILE'], 'w') as f:
-        f.write("STATUS='unknown'\nSOURCE='unknown'\nCOST='0'\nENTRY_ID=''\nFIX_DESC=''\nFIX_PATCH=''\nROOT_CAUSE=''\nCATEGORY=''\nATTRIBUTION=''\n")
+        NL = chr(10)
+        f.write(f"STATUS='unknown'{NL}SOURCE='unknown'{NL}COST='0'{NL}ENTRY_ID=''{NL}FIX_DESC=''{NL}FIX_PATCH=''{NL}ROOT_CAUSE=''{NL}CATEGORY=''{NL}ATTRIBUTION=''{NL}")
 " 2>/dev/null
   # 驗證暫存檔只包含合法的 shell 變數賦值
   if grep -qvE '^[A-Z_]+=' "$PARSE_FILE" 2>/dev/null; then
     echo "::warning::Unexpected content in parsed response, using defaults"
     STATUS='unknown'; SOURCE='unknown'; COST='0'; ENTRY_ID=''; FIX_DESC=''; FIX_PATCH=''; ROOT_CAUSE=''; CATEGORY=''; ATTRIBUTION=''
   else
+    # shellcheck source=/dev/null
     source "$PARSE_FILE"
   fi
   rm -f "$PARSE_FILE"
