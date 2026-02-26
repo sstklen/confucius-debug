@@ -45,6 +45,7 @@ async function handleMessage(line) {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
+        "X-Confucius-Channel": "mcp_registry",
       },
       body: JSON.stringify(request),
     });

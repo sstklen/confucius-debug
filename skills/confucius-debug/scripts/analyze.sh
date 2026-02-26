@@ -26,7 +26,7 @@ BODY=$(jq -n \
   --arg desc "$DESC" \
   --arg msg "$MSG" \
   --arg lid "$LOBSTER_ID" \
-  '{error_description: $desc, error_message: $msg, lobster_id: $lid}')
+  '{error_description: $desc, error_message: $msg, lobster_id: $lid, channel: "clawhub"}')
 
 RESPONSE=$(curl -s --max-time 30 -X POST "$API_URL" \
   -H "Content-Type: application/json" \

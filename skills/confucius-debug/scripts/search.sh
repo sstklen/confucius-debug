@@ -23,7 +23,7 @@ echo ""
 
 RESPONSE=$(curl -s --max-time 15 -w "%{http_code}" -o >(cat) -X POST "$API_URL" \
   -H "Content-Type: application/json" \
-  -d "{\"query\": $(echo "$QUERY" | jq -Rs .), \"limit\": 5}" 2>/dev/null) || {
+  -d "{\"query\": $(echo "$QUERY" | jq -Rs .), \"limit\": 5, \"channel\": \"clawhub\"}" 2>/dev/null) || {
   echo "❌ Cannot reach Confucius API (api.washinmura.jp). Check your internet or try again later."
   exit 1
 }
