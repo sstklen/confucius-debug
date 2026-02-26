@@ -1,0 +1,30 @@
+{
+  "$schema": "https://static.modelcontextprotocol.io/schemas/2025-12-11/server.schema.json",
+  "name": "io.github.sstklen/confucius-debug",
+  "description": "AI debugging with 980+ verified fixes. Search the YanHui KB — never repeat a mistake.",
+  "repository": {
+    "url": "https://github.com/sstklen/confucius-debug",
+    "source": "github",
+    "subfolder": "mcp-server"
+  },
+  "version": "2.0.0",
+  "packages": [
+    {
+      "registryType": "npm",
+      "identifier": "confucius-debug-mcp",
+      "version": "2.0.0",
+      "transport": {
+        "type": "stdio"
+      },
+      "environmentVariables": [
+        {
+          "name": "CONFUCIUS_LOBSTER_ID",
+          "description": "Your unique identifier for tracking contributions (any username). Optional for search, required for analyze/contribute.",
+          "isRequired": false,
+          "format": "string",
+          "isSecret": false
+        }
+      ]
+    }
+  ]
+}

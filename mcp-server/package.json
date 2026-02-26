@@ -1,0 +1,30 @@
+{
+  "name": "confucius-debug-mcp",
+  "version": "2.0.0",
+  "description": "Confucius Debug MCP Server — AI debugging that never repeats a mistake. 6,800+ issues, 980+ verified fixes.",
+  "mcpName": "io.github.sstklen/confucius-debug",
+  "license": "MIT",
+  "author": "Washin Village <aiwashinmura.jp@gmail.com> (https://washinmura.jp)",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/sstklen/confucius-debug.git"
+  },
+  "homepage": "https://github.com/sstklen/confucius-debug",
+  "keywords": [
+    "mcp",
+    "mcp-server",
+    "debugging",
+    "ai",
+    "confucius",
+    "knowledge-base"
+  ],
+  "type": "module",
+  "main": "index.js",
+  "bin": {
+    "confucius-debug-mcp": "index.js"
+  },
+  "files": [
+    "index.js",
+    "README.md"
+  ]
+}

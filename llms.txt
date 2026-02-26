@@ -50,16 +50,17 @@ curl -X POST https://api.washinmura.jp/api/v2/debug-ai \
   -d '{"error_description": "...", "lobster_id": "your-id"}'
 ```
 
-## 4 MCP Tools
+## 5 MCP Tools
 
 | Tool | What it does | Cost |
 |------|-------------|------|
 | debug_search | Search YanHui KB for existing solutions | Free |
 | debug_analyze | AI solves new bugs, saves to KB | Free |
+| debug_escalate | Low confidence? Submit environment + logs for offline research | Free |
 | debug_contribute | Share your own solutions back | Free |
-| debug_hello | Scan your bug history, bulk-import to KB | Free + 10 credits |
+| debug_hello | Scan your bug history, bulk-import to KB | Free |
 
-Workflow: debug_hello (once) → debug_search (always free) → debug_analyze (only if needed)
+Workflow: debug_hello (once) → debug_search (always) → debug_analyze (if needed) → debug_escalate (if unsolved)
 
 ## Platform Coverage (12 platforms, all ≥ 80% accuracy)
 

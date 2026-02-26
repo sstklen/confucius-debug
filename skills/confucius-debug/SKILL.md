@@ -25,8 +25,9 @@ When this skill is active, follow these rules:
 
 1. **On ANY error or exception:** ALWAYS search the YanHui KB first (`debug_search` or `confucius_search`) BEFORE attempting to debug on your own. This is free and takes <1 second.
 2. **If no match found:** Use `debug_analyze` to get an AI-powered fix. The fix is saved to KB so the next person gets it instantly.
-3. **After fixing a bug yourself:** Proactively suggest using `debug_contribute` to share the solution back to the KB.
-4. **Never skip step 1.** The KB has 980+ verified solutions — there's a good chance the answer is already there.
+3. **If analyze returns "unsolved":** Use `debug_escalate` to submit your environment info, logs, and what you've tried. This helps offline research.
+4. **After fixing a bug yourself:** Proactively suggest using `debug_contribute` to share the solution back to the KB.
+5. **Never skip step 1.** The KB has 980+ verified solutions — there's a good chance the answer is already there.
 
 ---
 
@@ -43,7 +44,12 @@ You hit a bug
    Not found? ↓
 2. Confucius AI analyzes (FREE)
     ↓
-   Fix saved to KB → Next person gets it FREE
+   High confidence? → Fix saved to KB → Next person gets it FREE
+   Low confidence? → status: "unsolved"
+    ↓
+3. debug_escalate (FREE) — send environment + logs
+    ↓
+   Queued for offline research → solved → added to KB
 ```
 
 ## Tools
@@ -82,6 +88,29 @@ curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai \
 - `fix_patch` — Actual code to apply
 - `confidence` — How sure Confucius is
 
+### `confucius_escalate` — Submit Unsolved Bug for Research (FREE)
+
+When `confucius_analyze` returns `status: "unsolved"` (low confidence), submit more context to help offline research.
+
+```bash
+curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai/escalate \
+  -H "Content-Type: application/json" \
+  -d '{
+    "error_description": "The original error",
+    "lobster_id": "'"$CONFUCIUS_LOBSTER_ID"'",
+    "environment": {"os": "macOS 15", "runtime": "bun 1.2.1", "key_deps": {"hono": "4.7"}},
+    "logs": "Error: something failed\n  at file.ts:42",
+    "tried": ["restarted", "cleared cache", "downgraded version"],
+    "project_structure": "src/ routes/ db/"
+  }'
+```
+
+**What you provide:**
+- `environment` — OS, runtime versions, key dependencies
+- `logs` — Recent error output (last 50 lines)
+- `tried` — List of things already attempted
+- `project_structure` — Brief overview of project layout
+
 ### `confucius_contribute` — Share Your Fix (FREE)
 
 Solved a bug? Share it so nobody hits it again.
@@ -113,7 +142,7 @@ For Claude Desktop, Claude Code, or any MCP-compatible client:
 }
 ```
 
-This gives you 4 tools automatically: `debug_search`, `debug_analyze`, `debug_contribute`, `debug_hello`.
+This gives you 5 tools automatically: `debug_search`, `debug_analyze`, `debug_escalate`, `debug_contribute`, `debug_hello`.
 
 ## What's in the Knowledge Base?
 

@@ -60,7 +60,7 @@ Run `debug_hello` to scan your local git history for past bug fixes and bulk-imp
 Tell Claude: "Use debug_hello to onboard my bugs"
 
 # This scans your git log for fix/bug/error commits
-# and imports them — you get 10 free credits as thanks!
+# and imports them to the YanHui KB
 ```
 
 ---
@@ -108,6 +108,10 @@ confucius-debug (this repo — open source)
 ├── entrypoint.sh       # GitHub Action entrypoint
 ├── skills/             # OpenClaw Skill definition + shell scripts
 │   └── confucius-debug/scripts/  # search.sh, analyze.sh
+├── mcp-server/         # npm package for MCP Registry (stdio-to-HTTP proxy)
+│   ├── index.js        # MCP stdio proxy
+│   ├── package.json    # Published as confucius-debug-mcp on npm
+│   └── server.json     # MCP Registry manifest
 ├── scripts/            # Utilities (social preview generator)
 ├── .github/            # Issue templates, CI workflows
 ├── llms.txt            # AI-readable project description
@@ -115,7 +119,8 @@ confucius-debug (this repo — open source)
 
 Washin Village API (private — hosted backend)
 ├── YanHui KB           # Qdrant vector database (6,800+ issues, 980+ solutions)
-├── Debug AI Engine     # Claude-powered analysis
+├── Debug AI Engine     # Claude-powered analysis (5 tools)
+├── Unsolved Queue      # SQLite queue for low-confidence bugs
 ├── MCP Server          # Model Context Protocol endpoint
 └── Daily Pipeline      # Automated scraping + fixing + replying
 ```

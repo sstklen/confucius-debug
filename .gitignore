@@ -17,5 +17,8 @@ node_modules/
 *.swp
 *.swo
 
+# MCP Registry tokens
+.mcpregistry_*
+
 # 暫存檔
 /tmp/

@@ -52,11 +52,19 @@ Your AI agent hits a bug
        ▼
   Confucius AI analyzes (FREE, ~6s)
        │
-       ▼
-  Fix saved to KB → Next person gets it FREE
+       ├── High confidence → Fix saved to KB → Next person gets it FREE
+       │
+       └── Low confidence → "We don't know yet"
+                │
+                ▼
+          debug_escalate → Agent sends environment + logs
+                │
+                ▼
+          Queued for offline research → Solved → Added to KB
 ```
 
 **Your bugs help everyone. Everyone's bugs help you.**
+**Honest when unsure — Confucius never makes up answers.**
 
 ---
 
@@ -101,7 +109,7 @@ Or add to your MCP config:
 }
 ```
 
-Then tell your AI: *"Use debug_hello to set up"* — you get **10 free credits**.
+Then tell your AI: *"Use debug_hello to set up"* — imports your past bugs and gets you started.
 
 ### GitHub Action
 
@@ -139,16 +147,17 @@ curl -X POST https://api.washinmura.jp/api/v2/debug-ai \
 
 ---
 
-## 4 Tools
+## 5 Tools
 
 | Tool | What it does | Cost |
 |------|-------------|------|
 | `debug_search` | Search YanHui KB for existing solutions | **Free** |
 | `debug_analyze` | No match? AI solves it, saves to KB | **Free** |
+| `debug_escalate` | Low confidence? Submit environment + logs for offline research | **Free** |
 | `debug_contribute` | Share your own solutions back | **Free** |
-| `debug_hello` | Scan your bug history, bulk-import to KB | **Free** + 10 credits |
+| `debug_hello` | Scan your bug history, bulk-import to KB | **Free** |
 
-**Workflow:** `debug_hello` (once) → `debug_search` (always free) → `debug_analyze` (only if needed)
+**Workflow:** `debug_hello` (once) → `debug_search` (always) → `debug_analyze` (if needed) → `debug_escalate` (if unsolved)
 
 ---
 
@@ -290,7 +299,13 @@ Agent hits a bug
     ↓
 debug_search → KB has a fix? → Use it! (instant)
     ↓ no match
-debug_analyze → AI generates a fix → saved to KB
+debug_analyze → AI generates a fix
+    ├── High confidence → Saved to KB ✅
+    └── Low confidence → status: "unsolved"
+         ↓
+    debug_escalate → Agent sends environment + logs
+         ↓
+    Queued for offline research → solved → added to KB
     ↓
 Agent solves a bug on its own?
     ↓
@@ -324,6 +339,13 @@ curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai \
   -H "Content-Type: application/json" \
   -d '{"error_description": "what happened", "error_message": "exact error", "lobster_id": "your-agent-name"}'
 
+# Escalate (if analyze returned "unsolved" — provide environment info)
+curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai/escalate \
+  -H "Content-Type: application/json" \
+  -d '{"error_description": "the unsolved bug", "lobster_id": "your-agent-name",
+       "environment": {"os": "macOS", "runtime": "bun 1.2"}, "logs": "error output...",
+       "tried": ["restarted", "cleared cache"]}'
+
 # Contribute back (if agent solved it)
 curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai/onboard \
   -H "Content-Type: application/json" \
@@ -350,7 +372,7 @@ curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai/onboard \
 ```bash
 claude mcp add confucius-debug --transport http https://api.washinmura.jp/mcp/debug -s user
 ```
-Tell Claude: *"Use debug_hello to onboard"* → 10 free credits.
+Tell Claude: *"Use debug_hello to onboard"* — it scans your past bugs and imports them.
 
 #### 2. Add to GitHub Secrets
 
@@ -397,7 +419,7 @@ jobs:
 
 | Output | Description |
 |--------|-------------|
-| `status` | `knowledge_hit`, `analyzed`, or `error` |
+| `status` | `knowledge_hit`, `analyzed`, `unsolved`, or `error` |
 | `fix` | Full JSON response with fix details |
 | `source` | `knowledge_base`, `sonnet`, or `opus` |
 | `cost` | Cost in USD (always 0 — everything is free) |
