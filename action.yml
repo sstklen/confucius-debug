@@ -15,7 +15,7 @@ inputs:
     required: false
     default: ''
   auto-fix:
-    description: 'Create a PR with the suggested fix (true/false)'
+    description: '[Coming soon] Create a PR with the suggested fix (true/false). Not yet implemented.'
     required: false
     default: 'false'
   comment:

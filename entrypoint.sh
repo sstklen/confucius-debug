@@ -158,7 +158,7 @@ echo "::endgroup::"
 
 if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
   # 解析 API 回傳（安全方式：寫入暫存檔，避免 eval 注入風險）
-  PARSE_FILE=$(mktemp)
+  export PARSE_FILE=$(mktemp)
   echo "$BODY" | python3 -c "
 import sys, json, shlex, os
 try:

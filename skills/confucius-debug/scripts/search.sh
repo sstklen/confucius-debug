@@ -21,7 +21,6 @@ API_URL="https://api.washinmura.jp/api/v2/debug-ai/search"
 echo "🔍 Searching YanHui KB for: ${QUERY:0:80}..."
 echo ""
 
-HTTP_CODE=$(mktemp)
 RESPONSE=$(curl -s --max-time 15 -w "%{http_code}" -o >(cat) -X POST "$API_URL" \
   -H "Content-Type: application/json" \
   -d "{\"query\": $(echo "$QUERY" | jq -Rs .), \"limit\": 5}" 2>/dev/null) || {

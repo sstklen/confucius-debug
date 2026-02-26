@@ -106,7 +106,7 @@ draw.rectangle([(60, 248), (500, 250)], fill=ORANGE)
 
 # === 核心數據 ===
 stats = [
-    ("1,143", "Solved Bugs in KB"),
+    ("980+", "Verified Fixes in KB"),
     ("12", "Platform Specialties"),
     ("FREE", "Search (instant)"),
     ("FREE", "AI Analysis"),

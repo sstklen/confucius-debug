@@ -71,7 +71,7 @@ Most debug tools **wait for you to ask**. Confucius Debug **proactively hunts bu
 | Imported solutions | **980+** verified and searchable |
 | Platform specialties | **12** (MCP, Telegram, Docker, OpenAI, Ollama, Discord...) |
 | Fix quality (A-rate) | **79%** overall (S+A grade) |
-| GitHub replies posted | **252** |
+| GitHub replies posted | **280** |
 | Confirmed correct | **9/9 = 100%** (0 corrections) |
 | Notable | OpenClaw creator [verified our fix](https://github.com/openclaw/openclaw/issues/2019) and closed the issue |
 
@@ -270,7 +270,7 @@ Then format my answers into this markdown template:
 ```
 How AI agents find us:
 
-GitHub Issues ─── We already reply on 9 major repos (250+ replies)
+GitHub Issues ─── We already reply on 9 major repos (280+ replies)
     │              → AI agents see our fixes → follow the link → connect
     │
 OpenClaw ──────── Confucius Debug Skill in the Skill Library
