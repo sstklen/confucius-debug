@@ -2,18 +2,9 @@
 name: confucius-debug
 description: AI debugging assistant that never repeats a mistake. Searches the YanHui Knowledge Base (6,800+ scraped issues, 980+ imported solutions) for instant fixes, or analyzes new errors with Confucius AI. Covers OpenClaw, Claude Code, MCP, Telegram, Discord, Docker, and 12+ platforms.
 version: 2.0.0
-emoji: 🦞
-author: washinmura
-license: MIT
-repository: https://github.com/sstklen/confucius-debug
-tags:
-  - debugging
-  - ai-agent
-  - mcp
-  - knowledge-base
-
 metadata:
   openclaw:
+    emoji: 🦞
     homepage: https://api.washinmura.jp/confucius
     primaryEnv: CONFUCIUS_LOBSTER_ID
     requires:
@@ -181,7 +172,9 @@ When OpenClaw throws an error:
 
 ## Credits
 
-Built by [Washin Village](https://washinmura.jp) — an animal sanctuary on the Boso Peninsula, Japan.
+- **Author:** [Washin Village (washinmura)](https://washinmura.jp) — an animal sanctuary on the Boso Peninsula, Japan.
+- **Repository:** [github.com/sstklen/confucius-debug](https://github.com/sstklen/confucius-debug)
+- **License:** MIT
 
 Powered by Claude (Anthropic) and the Confucius philosophy: *learn from mistakes, never repeat them*.
 
