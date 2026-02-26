@@ -1,0 +1,98 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  validate:
+    name: Validate
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      # action.yml YAML 格式驗證
+      - name: Validate action.yml
+        run: python3 -c "import yaml; yaml.safe_load(open('action.yml'))"
+
+      # entrypoint.sh 語法檢查（ShellCheck）
+      - name: ShellCheck entrypoint.sh
+        uses: ludeeus/action-shellcheck@2.0.0
+        with:
+          scandir: '.'
+          additional_files: 'entrypoint.sh'
+          severity: warning
+
+      # Skill 腳本語法檢查
+      - name: ShellCheck skill scripts
+        uses: ludeeus/action-shellcheck@2.0.0
+        with:
+          scandir: 'skills/confucius-debug/scripts'
+          severity: warning
+
+      # SKILL.md frontmatter YAML 驗證
+      - name: Validate SKILL.md frontmatter
+        run: |
+          python3 -c "
+          import yaml
+          with open('skills/confucius-debug/SKILL.md') as f:
+              content = f.read()
+          # 提取 YAML frontmatter（--- 到 --- 之間）
+          parts = content.split('---', 2)
+          if len(parts) >= 3:
+              meta = yaml.safe_load(parts[1])
+              assert 'name' in meta, 'Missing: name'
+              assert 'description' in meta, 'Missing: description'
+              assert 'version' in meta, 'Missing: version'
+              print(f'SKILL.md OK: {meta[\"name\"]} v{meta[\"version\"]}')
+          else:
+              raise ValueError('No YAML frontmatter found')
+          "
+
+      # 確認必要檔案存在
+      - name: Check required files
+        run: |
+          for f in action.yml entrypoint.sh README.md LICENSE llms.txt \
+                   skills/confucius-debug/SKILL.md \
+                   skills/confucius-debug/scripts/search.sh \
+                   skills/confucius-debug/scripts/analyze.sh; do
+            if [ ! -f "$f" ]; then
+              echo "::error::Missing required file: $f"
+              exit 1
+            fi
+          done
+          echo "All required files present"
+
+      # 腳本可執行權限檢查
+      - name: Check script permissions
+        run: |
+          for script in entrypoint.sh skills/confucius-debug/scripts/search.sh skills/confucius-debug/scripts/analyze.sh; do
+            if [ ! -x "$script" ]; then
+              echo "::error::$script is not executable (missing chmod +x)"
+              exit 1
+            fi
+          done
+          echo "All scripts are executable"
+
+  # API 連線健康檢查（僅在 main 分支）
+  api-health:
+    name: API Health Check
+    runs-on: ubuntu-latest
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    steps:
+      - name: Check Confucius API
+        run: |
+          # 搜尋端點（免費，不需要 ID）
+          HTTP_CODE=$(curl -s -o /dev/null -w "%{http_code}" \
+            -X POST https://api.washinmura.jp/api/v2/debug-ai/search \
+            -H "Content-Type: application/json" \
+            -d '{"query": "test", "limit": 1}' \
+            --max-time 15)
+
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "API is healthy (HTTP $HTTP_CODE)"
+          else
+            echo "::warning::API returned HTTP $HTTP_CODE — may be temporarily unavailable"
+          fi
