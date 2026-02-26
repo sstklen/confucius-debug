@@ -131,7 +131,7 @@ for i, (number, label) in enumerate(stats):
     )
 
     # 數字
-    num_color = ORANGE if number in ("1,143", "FREE") else WHITE
+    num_color = ORANGE if number in ("980+", "FREE") else WHITE
     draw.text((x + 20, y + 15), number, fill=num_color, font=font_large)
 
     # 標籤
