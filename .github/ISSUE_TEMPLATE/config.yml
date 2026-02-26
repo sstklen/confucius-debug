@@ -2,7 +2,7 @@ blank_issues_enabled: true
 contact_links:
   - name: "Search the Knowledge Base first (free)"
     url: "https://api.washinmura.jp/mcp/debug"
-    about: "Try searching our 1,100+ solved bugs before submitting — your answer might already be there!"
+    about: "Try searching our 6,800+ bugs (980+ verified fixes) before submitting — your answer might already be there!"
   - name: "Washin Village"
     url: "https://washinmura.jp"
     about: "Built by an animal sanctuary in Japan, caring for 28 cats and dogs."
