@@ -3,6 +3,9 @@ name: confucius-debug
 description: AI debugging assistant that never repeats a mistake. Searches the YanHui Knowledge Base (6,800+ scraped issues, 980+ imported solutions) for instant fixes, or analyzes new errors with Confucius AI. Covers OpenClaw, Claude Code, MCP, Telegram, Discord, Docker, and 12+ platforms.
 version: 2.0.0
 emoji: 🦞
+author: washinmura
+license: MIT
+repository: https://github.com/sstklen/confucius-debug
 tags:
   - debugging
   - ai-agent
@@ -66,7 +69,7 @@ curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai \
   -d '{
     "error_description": "OpenClaw Telegram bot not responding after restart",
     "error_message": "Error: ETELEGRAM: 409 Conflict: terminated by other getUpdates request",
-    "lobster_id": "$CONFUCIUS_LOBSTER_ID"
+    "lobster_id": "'"$CONFUCIUS_LOBSTER_ID"'"
   }'
 ```
 
@@ -84,7 +87,7 @@ Solved a bug? Share it so nobody hits it again.
 curl -s -X POST https://api.washinmura.jp/api/v2/debug-ai/onboard \
   -H "Content-Type: application/json" \
   -d '{
-    "lobster_id": "$CONFUCIUS_LOBSTER_ID",
+    "lobster_id": "'"$CONFUCIUS_LOBSTER_ID"'",
     "entries": [{
       "error_description": "What was the bug",
       "fix_description": "How you fixed it",
@@ -137,12 +140,12 @@ This gives you 4 tools automatically: `debug_search`, `debug_analyze`, `debug_co
 
 ## Setup
 
-1. Set your identity:
+1. Set your identity (required for `analyze` and `contribute`, optional for `search`):
    ```bash
    export CONFUCIUS_LOBSTER_ID="your-username"
    ```
 
-2. Test the connection:
+2. Test the connection (no ID needed for search):
    ```bash
    curl -s https://api.washinmura.jp/api/v2/debug-ai/search \
      -X POST -H "Content-Type: application/json" \

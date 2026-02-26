@@ -1,0 +1,13 @@
+# 二進制和非 Skill 檔案
+social-preview.png
+*.png
+*.jpg
+*.gif
+
+# GitHub 專用
+.github/
+CODEOWNERS
+
+# 開發用
+.git/
+.DS_Store

@@ -94,7 +94,7 @@ Tell Claude: "Use debug_hello to onboard my bugs"
 
 - Small fixes (typos, docs): Usually merged within 24 hours
 - Feature PRs: Reviewed within a few days
-- All PRs need at least one review before merge
+- The maintainer (tkman) is not an engineer — if you're an engineer and can help review, your expertise is greatly appreciated!
 
 ---
 
@@ -113,7 +113,7 @@ confucius-debug (this repo — open source)
 └── README.md
 
 Washin Village API (private — hosted backend)
-├── YanHui KB           # Qdrant vector database (1,100+ solutions)
+├── YanHui KB           # Qdrant vector database (6,800+ issues, 980+ solutions)
 ├── Debug AI Engine     # Claude-powered analysis
 ├── MCP Server          # Model Context Protocol endpoint
 └── Daily Pipeline      # Automated scraping + fixing + replying

@@ -423,6 +423,12 @@ Contributions are permanent — that's the point. Never repeat a mistake.
 
 ---
 
+## Maintainer Note
+
+> Hi, I'm **tkman** — the creator of Confucius Debug. I'm **not an engineer**. I built this entire project with AI, and I'll do my best to maintain it. If you find a bug, please report it — I'll try my hardest to fix it. If you're an engineer and know how to help, **PRs are very welcome**. Let's make Confucius better together. 🙏
+
+---
+
 ## Related Projects
 
 | Project | What it does |
